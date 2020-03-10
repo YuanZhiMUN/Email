@@ -1,1 +1,30 @@
-<p>input works!</p>
+<div class="field">
+    <label>{{label}}</label>
+    <input type="text" [formControl]="control">
+    <div *ngIf="showErrors()" class="ui pointing red basic label">
+        <p *ngIf="control.errors.required">
+            Value is required
+        </p>
+        <p *ngIf="control.errors.minlength">
+            Value you enter is 
+            {{ control.errors.minlength.actualLength }}
+            characters, but it must be at least
+            {{ control.errors.minlength.requiredLength }} characters
+        </p>
+        <p *ngIf="control.errors.maxlength">
+            Value you enter is 
+            {{ control.errors.maxlength.actualLength }}
+            characters, but it must be less than
+            {{ control.errors.maxlength.requiredLength }} characters
+        </p>
+        <p *ngIf="control.errors.pattern">
+            The name should composes of numbers or/and characters.
+        </p>
+        <p *ngIf="control.errors.nonUniqueUsername">
+            User name is taken.
+        </p>
+        <p *ngIf="control.errors.nonConnection">
+            No connection.
+        </p>
+    </div>
+</div>
