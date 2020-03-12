@@ -24,7 +24,7 @@ export class SignupComponent implements OnInit {
     passwordConfirm: new FormControl('', [
       Validators.required,
       Validators.minLength(4),
-      Validators.minLength(20)
+      Validators.maxLength(20)
     ])
     }, 
     { validators:[this.matchPassword.validate] }
