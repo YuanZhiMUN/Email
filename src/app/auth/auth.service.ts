@@ -17,6 +17,12 @@ interface AuthResponse {
 interface ResultResponse {
   username: String
 }
+
+interface CredientialsDetails {
+  username: String,
+  password: String
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -47,5 +53,23 @@ export class AuthService {
             .pipe(
               tap(({ authenticated })  => {this.signIn$.next(authenticated);})
             )
+  }
+
+  signOut() {
+    return this.http.post(`${this.rootUrl}/auth/signout`, {})
+      .pipe(
+        tap(() => {
+          this.signIn$.next(false)
+        })
+      )
+  }
+
+  signIn(credientialsDetails: CredientialsDetails) {
+    return this.http.post(`${this.rootUrl}/auth/signin`, credientialsDetails)
+      .pipe(
+        tap(() => {
+          this.signIn$.next(true)
+        })
+      )
   }
 }
