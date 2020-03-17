@@ -9,6 +9,11 @@ interface Credientials {
   passwordConfirmation: String
 }
 
+interface AuthResponse {
+  username: String,
+  authenticated: boolean
+}
+
 interface ResultResponse {
   username: String
 }
@@ -38,9 +43,9 @@ export class AuthService {
   }
 
   authCheck(){
-    return this.http.get(`${this.rootUrl}/auth/signedin`)
+    return this.http.get<AuthResponse>(`${this.rootUrl}/auth/signedin`)
             .pipe(
-              tap(res => console.log(res))
+              tap(({ authenticated })  => {this.signIn$.next(authenticated);})
             )
   }
 }
