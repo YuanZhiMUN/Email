@@ -27,7 +27,7 @@ interface CredientialsDetails {
   providedIn: 'root'
 })
 export class AuthService {
-  signIn$ = new BehaviorSubject(false);
+  signIn$ = new BehaviorSubject(null);
   rootUrl='https://api.angular-email.com';
   constructor(private http: HttpClient) {
 
